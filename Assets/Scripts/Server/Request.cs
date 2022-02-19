@@ -27,6 +27,11 @@ public class Request : MonoBehaviour
         StartCoroutine(GetRequest(serverUrl + "deleteLast", callback));
     }
 
+    public void ReadStatus(System.Action<string> callback, string url = serverUrl)
+    {
+        StartCoroutine(GetRequest(serverUrl + "ReadStatus", callback));
+    }
+
     public void InsertData(string name, int value, System.Action<string> callback, string url = serverUrl)
     {
         JsonInsertData jsonObj = new JsonInsertData();
@@ -58,7 +63,7 @@ public class Request : MonoBehaviour
                     callback("ERROR");
                     break;
                 case UnityWebRequest.Result.Success:
-                    Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                    //Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
                     callback(webRequest.downloadHandler.text);
                     break;
             }
