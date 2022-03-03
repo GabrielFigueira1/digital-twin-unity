@@ -5,10 +5,16 @@ using UnityEngine;
 public class SensorHandler : MonoBehaviour
 {
     private DatabaseInstance databaseInstance;
-    public Light sensor1;
-    public Light sensor2;
-    public Light sensor3;
-    public MeshRenderer arm; 
+    public LineRenderer sensor1;
+    public LineRenderer sensor2;
+    public LineRenderer sensor3;
+    public GameObject arm; 
+
+    [SerializeField]
+    private Color sensorGreen;
+
+    [SerializeField]
+    private Color sensorRed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,22 +26,34 @@ public class SensorHandler : MonoBehaviour
     void Update()
     {
         if (databaseInstance.jsonData.Status_M104 == 1)
-            sensor1.intensity = 25;
+            SetSensorOn(sensor1);
         else
-            sensor1.intensity = 1;
+            SetSensorOff(sensor1);
 
         if (databaseInstance.jsonData.Status_M102 == 1)
-            sensor2.intensity = 25;
+            SetSensorOn(sensor2);
         else
-            sensor2.intensity = 1;
+            SetSensorOff(sensor2);
 
         if (databaseInstance.jsonData.Status_M103 == 1)
-            sensor3.intensity = 25;
+            SetSensorOn(sensor3);
         else
-            sensor3.intensity = 1;
-         if (databaseInstance.jsonData.Status_M122 == 1)
-            arm.material.SetColor("Red", new Color(0.3f, 0.4f, 0.6f, 0.3f));
+            SetSensorOff(sensor3);
+        if (databaseInstance.jsonData.Status_M122 == 1)
+            arm.transform.eulerAngles = new Vector3(90f, -90f, 90f);
         else
-            sensor3.intensity = 1;   
+            arm.transform.eulerAngles = new Vector3(90f, -90f, 0f);
+    }
+
+    void SetSensorOn(LineRenderer line)
+    {
+        line.startColor = sensorGreen;
+        line.endColor = sensorGreen;
+    }
+
+    void SetSensorOff(LineRenderer line)
+    {
+        line.startColor = sensorRed;
+        line.endColor = sensorRed;
     }
 }

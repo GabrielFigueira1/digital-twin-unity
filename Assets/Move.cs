@@ -10,10 +10,15 @@ public class Move : MonoBehaviour
     public GameObject waypointExit_2;
 
     private float speed = 1.5f;
+
+    [SerializeField]
+    private float lifetimeLimit = 15f;
+
     private Vector3 direction;
     private Vector3 nextWaypoint;
     private DatabaseInstance databaseInstance;
 
+    float spawnTimestamp;
     enum Path
     {
         Start,
@@ -36,6 +41,8 @@ public class Move : MonoBehaviour
 
         direction = (waypointArm.transform.position - transform.position).normalized;
         nextWaypoint = waypointArm.transform.position;
+
+        spawnTimestamp = Time.time;
     }
 
     // Update is called once per frame
@@ -46,7 +53,7 @@ public class Move : MonoBehaviour
             case Path.Start:
                 if ((transform.position - nextWaypoint).magnitude > 0.01)
                 {
-                    transform.Translate(direction * Time.deltaTime * speed * 0.75f);
+                    transform.Translate(direction * Time.deltaTime * speed * 0.6f);
                 }
                 else
                 {
@@ -92,7 +99,7 @@ public class Move : MonoBehaviour
                 {
                     transform.Translate(direction * Time.deltaTime * speed *0.6f);
                 }
-                else if ((transform.position - nextWaypoint).magnitude <= 0.01 && databaseInstance.jsonData.Status_M103 == 1)
+                else if ((transform.position - nextWaypoint).magnitude <= 1 && databaseInstance.jsonData.Status_M103 == 1)
                 {
                     transform.position = waypointExit_2.transform.position;
                     Destroy(gameObject, 1);
@@ -100,6 +107,10 @@ public class Move : MonoBehaviour
                 break;
             default:
                 break;
+        }
+        if (Time.time > spawnTimestamp + lifetimeLimit){
+            Debug.LogError("Lifetime period exceded limit. Product did not receive an instruction to be destroyed. Destroying now.");
+            Destroy(gameObject);
         }
     }
 
