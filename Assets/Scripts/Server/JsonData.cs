@@ -52,3 +52,9 @@ public class JsonData
     public int Status_M138;
     public int Status_M139;
 }
+
+public class JsonAnomalies
+{
+    public int anomalieId;
+    public string message;
+}

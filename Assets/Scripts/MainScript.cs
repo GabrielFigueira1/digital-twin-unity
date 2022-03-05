@@ -43,8 +43,18 @@ public class MainScript : MonoBehaviour
         {
             req.ReadStatus((requestBody) =>
              {
-                 databaseInstance.jsonData = JsonUtility.FromJson<JsonData>(requestBody);
-                 //Debug.Log(database.Status_M101);
+                databaseInstance.jsonData = JsonUtility.FromJson<JsonData>(requestBody);
+                //Debug.Log(database.Status_M101);
+             }
+            );
+            req.ReadAnomalies((requestBody) =>
+             {
+                databaseInstance.jsonAnomalies = JsonUtility.FromJson<JsonAnomalies>(requestBody);
+                if (databaseInstance.jsonAnomalies != null){
+                     Debug.LogWarning("Anomalie number: " + databaseInstance.jsonAnomalies.anomalieId);
+                     Debug.LogWarning(databaseInstance.jsonAnomalies.message);
+                     Debug.Log("");
+                 }
              }
             );
             nextReadTime = Time.time + databaseUpdateInterval;
