@@ -8,6 +8,7 @@ public class Move : MonoBehaviour
     public GameObject waypointCurve;
     public GameObject waypointExit_1;
     public GameObject waypointExit_2;
+    public ScrollViewHandler scrollView;
 
     private float speed = 1.5f;
 
@@ -109,7 +110,8 @@ public class Move : MonoBehaviour
                 break;
         }
         if (Time.time > spawnTimestamp + lifetimeLimit){
-            Debug.LogError("Lifetime period exceded limit. Product did not receive an instruction to be destroyed. Destroying now.");
+            scrollView.Log("Erro na virtualização do produto. Pode ser que hajam anomalias na planta.");
+            //Debug.LogError("Lifetime period exceded limit. Product did not receive an instruction to be destroyed. Destroying now.");
             Destroy(gameObject);
         }
     }

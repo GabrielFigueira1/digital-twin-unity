@@ -10,6 +10,8 @@ public class MainScript : MonoBehaviour
     private const float databaseUpdateInterval = 0.1f;
     private float nextReadTime = 0f;
     private DatabaseInstance databaseInstance;
+    [SerializeField]
+    private ScrollViewHandler scrollView;
 
     // Start is called before the first frame update
     void Awake()
@@ -51,9 +53,7 @@ public class MainScript : MonoBehaviour
              {
                 databaseInstance.jsonAnomalies = JsonUtility.FromJson<JsonAnomalies>(requestBody);
                 if (databaseInstance.jsonAnomalies != null){
-                     Debug.LogWarning("Anomalie number: " + databaseInstance.jsonAnomalies.anomalieId);
-                     Debug.LogWarning(databaseInstance.jsonAnomalies.message);
-                     Debug.Log("");
+                    scrollView.Log(databaseInstance.jsonAnomalies.anomalieId.ToString() + ": " + databaseInstance.jsonAnomalies.message);
                  }
              }
             );
