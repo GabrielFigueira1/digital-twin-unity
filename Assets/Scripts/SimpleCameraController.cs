@@ -8,6 +8,8 @@ namespace UnityTemplateProjects
 {
     public class SimpleCameraController : MonoBehaviour
     {
+        private Camera cam;
+
         class CameraState
         {
             public float yaw;
@@ -123,6 +125,7 @@ namespace UnityTemplateProjects
 
         void OnEnable()
         {
+            cam = GetComponent<Camera>();
             m_TargetCameraState.SetFromTransform(transform);
             m_InterpolatingCameraState.SetFromTransform(transform);
         }
@@ -136,19 +139,30 @@ namespace UnityTemplateProjects
             direction.z = moveDelta.y;
             direction.y = verticalMovementAction.ReadValue<Vector2>().y;
 #else
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
-                direction += Vector3.forward;
+                direction += Vector3.up;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.mouseScrollDelta.y < 0)
             {
-                direction += Vector3.back;
+                cam.orthographicSize -= Input.mouseScrollDelta.y/5;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                direction += Vector3.down;
+            }
+            if (Input.mouseScrollDelta.y > 0)
+            {
+                if (cam.orthographicSize > 0.5f)
+                    cam.orthographicSize -= Input.mouseScrollDelta.y/5;
+                else
+                    cam.orthographicSize = 0.5f;
+            }
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 direction += Vector3.left;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 direction += Vector3.right;
             }

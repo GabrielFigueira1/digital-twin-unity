@@ -34,12 +34,12 @@ public class EmmitProducts : MonoBehaviour
     bool canEmmit()
     {
         //Debug.Log(databaseInstance.jsonData.Status_M101);
-        if (databaseInstance.jsonData.Status_M101 == 1 && lastStatusM101 == 0)
+        if (databaseInstance.jsonData.Status_M102 == 1 && lastStatusM101 == 0)
         {
-            lastStatusM101 = databaseInstance.jsonData.Status_M101;
+            lastStatusM101 = databaseInstance.jsonData.Status_M102;
             return true;
         }
-        lastStatusM101 = databaseInstance.jsonData.Status_M101;
+        lastStatusM101 = databaseInstance.jsonData.Status_M102;
         return false;
     }
 }

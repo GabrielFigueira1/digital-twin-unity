@@ -37,6 +37,21 @@ public class Request : MonoBehaviour
         StartCoroutine(GetRequest(serverUrl + "ReadAnomalies", callback));
     }
 
+    public void StartSimulation(System.Action<string> callback, string url = serverUrl)
+    {
+        StartCoroutine(GetRequest(serverUrl + "Run", callback));
+    }
+
+    public void StopSimulation(System.Action<string> callback, string url = serverUrl)
+    {
+        StartCoroutine(GetRequest(serverUrl + "Stop", callback));
+    }
+
+    public void LearnPlant(System.Action<string> callback, string url = serverUrl)
+    {
+        StartCoroutine(GetRequest(serverUrl + "Learn", callback));
+    }
+
     public void InsertData(string name, int value, System.Action<string> callback, string url = serverUrl)
     {
         JsonInsertData jsonObj = new JsonInsertData();

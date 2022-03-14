@@ -5,63 +5,40 @@ using UnityEngine.UI;
 
 public class ButtonsHandler : MonoBehaviour
 {
-    [SerializeField]
-    private InputField newName;
-    [SerializeField]
-    private InputField newValue;
-    [SerializeField]
-    private Inst inst;
+    public ScrollViewHandler scrollView;
 
     public Request req;
 
-    public void DeleteLast()
-    {
-        req.DeleteLast((requestBody) =>
-        {
-            if (!IsRequestOK(requestBody)) return;
+    private Move product;
 
-            ReadLast();
+    public void StartSimulation()
+    {
+        req.StartSimulation((requestBody) =>
+        {
+            scrollView.Log(requestBody);
         }
         );
     }
 
-    public void Send()
+    public void StopSimulation()
     {
-        req.InsertData(newName.text, int.Parse(newValue.text), (requestBody) =>
+        req.StopSimulation((requestBody) =>
         {
-            if (!IsRequestOK(requestBody)) return;
-
-            ReadLast();
+            product = GameObject.FindObjectOfType<Move>();
+            if (product != null)
+                Destroy(product.gameObject);
+            scrollView.Log(requestBody);
         }
         );
     }
 
-    public void ReadLast()
+    public void LearnPlant()
     {
-        req.ReadLast((requestBody) =>
+        req.LearnPlant((requestBody) =>
         {
-            if (!IsRequestOK(requestBody)) return;
-            inst.textFieldData = JsonUtility.FromJson<TextFieldData>(requestBody);
-            Debug.Log(inst.textFieldData.name);
+            scrollView.Log(requestBody);
         }
         );
     }
-
-    private bool IsRequestOK(string requestBody)
-    {
-        if (requestBody == "ERROR")
-        {
-            Debug.LogError("Error on request.");
-            return false;
-        }
-        Debug.Log(requestBody);
-        return true;
-    }
-
-    void Start()
-    {
-        ReadLast();
-    }
-
 }
 

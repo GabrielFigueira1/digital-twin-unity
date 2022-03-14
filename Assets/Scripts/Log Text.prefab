@@ -32,11 +32,11 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 950, y: -420}
   m_SizeDelta: {x: 420, y: 40}
-  m_Pivot: {x: 2, y: -15}
+  m_Pivot: {x: 0.13, y: -1.31}
 --- !u!222 &6605174712094329438
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -78,5 +78,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "4: [Sat Mar 05 2022 18:00:02 GMT-0400 (Hor\xE1rio Padr\xE3o do Amazonas)]
-    O valor de Status_M123 \xE9 1. Esperado: 0"
+  m_Text: Plant Logs
