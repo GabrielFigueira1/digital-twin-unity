@@ -6,6 +6,8 @@ public class MainScript : MonoBehaviour
 {
     public Request req;
 
+    public GameObject anomalieArrow;
+
     [SerializeField]
     private const float databaseUpdateInterval = 0.125f;
     private float nextReadTime = 0f;
@@ -53,7 +55,29 @@ public class MainScript : MonoBehaviour
              {
                 databaseInstance.jsonAnomalies = JsonUtility.FromJson<JsonAnomalies>(requestBody);
                 if (databaseInstance.jsonAnomalies != null){
-                    scrollView.Log(databaseInstance.jsonAnomalies.anomalieId.ToString() + ": " + databaseInstance.jsonAnomalies.message);
+                     if (databaseInstance.jsonAnomalies.anomalieId != 0)
+                     {
+                         try
+                         {
+                             GameObject product = GameObject.Find("Product(Clone)");
+                             Instantiate(anomalieArrow,
+                             new Vector3(product.transform.position.x,
+                                        product.transform.position.y + 0.5f,
+                                        product.transform.position.z),
+                             Quaternion.identity);
+                         }
+                         catch (System.Exception)
+                         {
+
+                             throw;
+                         }
+
+                         scrollView.Log(databaseInstance.jsonAnomalies.anomalieId.ToString() + ": " + databaseInstance.jsonAnomalies.message);
+                     }
+                     else if (databaseInstance.jsonAnomalies.anomalieId == 0)
+                     {
+                         scrollView.Log(databaseInstance.jsonAnomalies.message);
+                     }
                  }
              }
             );

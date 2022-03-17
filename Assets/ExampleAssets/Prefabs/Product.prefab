@@ -99,4 +99,5 @@ MonoBehaviour:
   waypointExit_1: {fileID: 0}
   waypointExit_2: {fileID: 0}
   scrollView: {fileID: 0}
-  lifetimeLimit: 15
+  anomalieArrow: {fileID: 808611408147965353, guid: b7c8add4cb9b9f34eba96428d0ca74c9, type: 3}
+  lifetimeLimit: 10

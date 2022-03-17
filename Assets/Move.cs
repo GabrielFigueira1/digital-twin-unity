@@ -9,7 +9,7 @@ public class Move : MonoBehaviour
     public GameObject waypointExit_1;
     public GameObject waypointExit_2;
     public ScrollViewHandler scrollView;
-
+    public GameObject anomalieArrow;
     private float speed = 1.5f;
 
     [SerializeField]
@@ -76,7 +76,7 @@ public class Move : MonoBehaviour
                 {
                     transform.Translate(direction * Time.deltaTime * speed * 0.75f);
                 }
-                else if ((transform.position - nextWaypoint).magnitude <= 0.01 && databaseInstance.jsonData.Status_M102 == 1)
+                else if ((transform.position - nextWaypoint).magnitude <= 0.01 && databaseInstance.jsonData.Status_M103 == 1)
                 {
                     transform.position = waypointExit_1.transform.position;
                     Destroy(gameObject, 1);
@@ -101,7 +101,7 @@ public class Move : MonoBehaviour
                 {
                     transform.Translate(direction * Time.deltaTime * speed * .6f);
                 }
-                else if ((transform.position - nextWaypoint).magnitude <= 1 && databaseInstance.jsonData.Status_M103 == 1)
+                else if ((transform.position - nextWaypoint).magnitude <= 1 && databaseInstance.jsonData.Status_M104 == 1)
                 {
                     transform.position = waypointExit_2.transform.position;
                     Destroy(gameObject, 1);
@@ -113,6 +113,9 @@ public class Move : MonoBehaviour
         if (Time.time > spawnTimestamp + lifetimeLimit){
             scrollView.Log("Erro na virtualização do produto. Pode ser que hajam anomalias na planta ou o produto tenha sido removido indevidamente.");
             //Debug.LogError("Lifetime period exceded limit. Product did not receive an instruction to be destroyed. Destroying now.");
+            Instantiate(anomalieArrow,
+                        new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z),
+                        Quaternion.identity);
             Destroy(gameObject);
         }
     }
