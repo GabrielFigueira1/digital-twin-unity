@@ -13,7 +13,7 @@ public class Move : MonoBehaviour
     private float speed = 1.5f;
 
     [SerializeField]
-    private float lifetimeLimit = 15f;
+    private float lifetimeLimit = 13f;
 
     private Vector3 direction;
     private Vector3 nextWaypoint;
@@ -54,7 +54,7 @@ public class Move : MonoBehaviour
             case Path.Start:
                 if ((transform.position - nextWaypoint).magnitude > 0.01)
                 {
-                    transform.Translate(direction * Time.deltaTime * speed * 0.4f);
+                    transform.Translate(direction * Time.deltaTime * speed * 0.6f);
                 }
                 else
                 {
@@ -74,7 +74,7 @@ public class Move : MonoBehaviour
             case Path.Exit_1:
                 if ((transform.position - nextWaypoint).magnitude > 0.01)
                 {
-                    transform.Translate(direction * Time.deltaTime * speed * 1f);
+                    transform.Translate(direction * Time.deltaTime * speed * 0.75f);
                 }
                 else if ((transform.position - nextWaypoint).magnitude <= 0.01 && databaseInstance.jsonData.Status_M102 == 1)
                 {
@@ -99,7 +99,7 @@ public class Move : MonoBehaviour
             case Path.Exit_2_end:
                 if ((transform.position - nextWaypoint).magnitude > 0.01)
                 {
-                    transform.Translate(direction * Time.deltaTime * speed * .8f);
+                    transform.Translate(direction * Time.deltaTime * speed * .6f);
                 }
                 else if ((transform.position - nextWaypoint).magnitude <= 1 && databaseInstance.jsonData.Status_M103 == 1)
                 {
@@ -111,7 +111,7 @@ public class Move : MonoBehaviour
                 break;
         }
         if (Time.time > spawnTimestamp + lifetimeLimit){
-            scrollView.Log("Erro na virtualização do produto. Pode ser que hajam anomalias na planta ou instabilidade na rede");
+            scrollView.Log("Erro na virtualização do produto. Pode ser que hajam anomalias na planta ou o produto tenha sido removido indevidamente.");
             //Debug.LogError("Lifetime period exceded limit. Product did not receive an instruction to be destroyed. Destroying now.");
             Destroy(gameObject);
         }

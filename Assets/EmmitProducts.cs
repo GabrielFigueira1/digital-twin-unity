@@ -14,7 +14,7 @@ public class EmmitProducts : MonoBehaviour
 
     private DatabaseInstance databaseInstance;
 
-    int lastStatusM101 = 0;
+    int lastStatusM102 = 0;
     
     // Start is called before the first frame update
     void Awake()
@@ -34,12 +34,12 @@ public class EmmitProducts : MonoBehaviour
     bool canEmmit()
     {
         //Debug.Log(databaseInstance.jsonData.Status_M101);
-        if (databaseInstance.jsonData.Status_M102 == 1 && lastStatusM101 == 0)
+        if (databaseInstance.jsonData.Status_M120 == 1 && lastStatusM102 == 0)
         {
-            lastStatusM101 = databaseInstance.jsonData.Status_M102;
+            lastStatusM102 = databaseInstance.jsonData.Status_M120;
             return true;
         }
-        lastStatusM101 = databaseInstance.jsonData.Status_M102;
+        lastStatusM102 = databaseInstance.jsonData.Status_M120;
         return false;
     }
 }

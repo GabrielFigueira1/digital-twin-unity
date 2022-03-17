@@ -12,7 +12,7 @@ public class ScrollViewHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textPrefab.text = "Plant Logs";
+        textPrefab.text = "Logs";
         Text newText = Instantiate<Text>(textPrefab);
         newText.rectTransform.sizeDelta = new Vector2(420f, 20f);
         newText.transform.SetParent(content.transform);

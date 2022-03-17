@@ -25,17 +25,17 @@ public class SensorHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (databaseInstance.jsonData.Status_M104 == 1)
+        if (databaseInstance.jsonData.Status_M102 == 1)
             SetSensorOn(sensor1);
         else
             SetSensorOff(sensor1);
 
-        if (databaseInstance.jsonData.Status_M102 == 1)
+        if (databaseInstance.jsonData.Status_M103 == 1)
             SetSensorOn(sensor2);
         else
             SetSensorOff(sensor2);
 
-        if (databaseInstance.jsonData.Status_M103 == 1)
+        if (databaseInstance.jsonData.Status_M104 == 1)
             SetSensorOn(sensor3);
         else
             SetSensorOff(sensor3);

@@ -7,7 +7,7 @@ public class MainScript : MonoBehaviour
     public Request req;
 
     [SerializeField]
-    private const float databaseUpdateInterval = 0.1f;
+    private const float databaseUpdateInterval = 0.125f;
     private float nextReadTime = 0f;
     private DatabaseInstance databaseInstance;
     [SerializeField]
